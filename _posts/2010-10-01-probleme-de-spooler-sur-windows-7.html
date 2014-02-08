@@ -1,0 +1,22 @@
+--- 
+layout: post
+title: "Probl\xC3\xA8me de Spooler sur Windows 7"
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1285960607"
+  _edit_last: "1"
+---
+En fait la méthode la plus radicale et la plus efficace est de supprimer les fichiers directement dans le répertoire spooler des imprimantes :
+<ul>
+	<li>Ouvrir une invite de commande en mode administrateur (tous les programmes / accéssoires / clic droit sur Invite de commande (executer en tant qu'administrateur)).</li>
+	<li>Descendre dans c:\windows\system32\spool\PRINTERS\. #&gt; cd c:\WINDOWS\system32\spool\PRINTERS</li>
+	<li>On stop le spooler, si il marche : #&gt; net stop spooler</li>
+	<li>On supprime les différents fichiers : #&gt; del *.*</li>
+	<li>On démarre le spooler : #&gt; net start spooler.</li>
+</ul>

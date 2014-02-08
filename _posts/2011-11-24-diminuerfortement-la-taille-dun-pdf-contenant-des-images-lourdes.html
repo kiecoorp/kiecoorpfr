@@ -1,0 +1,32 @@
+---
+layout: post
+title: Diminuer(fortement) la taille d'un pdf contenant des images lourdes.
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1337076726"
+  _edit_last: "1"
+---
+Je vais pas faire de blabla je me suis entièrement reposé sur l'article :
+
+<a title="&quot;Compresser un document PDF numérisé&quot;" href="http://www.laspic.eu/atelier/063-compresser-un-document-pdf-numerise" target="_blank">http://www.laspic.eu/atelier/063-compresser-un-document-pdf-numerise</a>
+
+qui utlise le script Ghostscript, installé sur mon ubuntu.
+
+Pour résumer voici la commande :
+{% highlight bash %}
+$ gs -q -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook  -sOUTPUTFILE=output_ebook.pdf -f plaquette1.pdf
+{% endhighlight %}
+
+Pour les options de compressions en partant d'un fichier de 16Mo uniquement composés d'images :
+<ul>
+  <li>/screen  =&gt; 1.3M</li>
+  <li>/ebook  =&gt; 6.4Mo</li>
+  <li>/printer  =&gt; 29Mo</li>
+</ul>
+Pour l'ensemble des résultats j'ai trouvé la qualité très correcte.

@@ -1,0 +1,21 @@
+--- 
+layout: post
+title: Commande php_beautifier pour remettre en forme un code php
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1309557789"
+  _edit_last: "1"
+---
+Suite à la reprise d'un code relativement indigeste voici une première commande qui vous permettra de reformater tout ça :
+
+<pre lang="shell">
+php_beautifier -s2 -f avant.php -o apres.php -l 'NewLines(before=T_CLASS:public:T_FUNCTION)'  -l 'ArrayNested()' -l 'IndentStyles(style=k&r)'
+</pre>
+
+C'est une commande shell il faut avoir installé l'outil php_beautifier :). Toute la finesse se situe dans le choix des filtres et leurs options.

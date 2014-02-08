@@ -1,0 +1,28 @@
+--- 
+layout: post
+title: "Ins\xC3\xA9rer un subrepot dans ireport avec xml comme source de donn\xC3\xA9e."
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254317275"
+  _edit_last: "1"
+---
+<h2>Rapport principal</h2>
+XPath rapport principal : /Numero/Information
+
+Dans la config du subrapport dans le rapport principal
+<ul>
+	<li>Utiliser l'expression de source de donnée : =&gt; ((net.sf.jasperreports.engine.data.JRXmlDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("Information/lignes")</li>
+	<li>Expression de rapport secondaire (String) :  $P{SUBREPORT_DIR} + "lignes_sub_report.jasper"</li>
+</ul>
+<h2>Subreport (lignes_sub_report.jasper)</h2>
+<ul>
+	<li>Mettre quelque chose dans le columnHeader ou le Summary</li>
+	<li>Dans View -&gt; Report properties -&gt; onglet More, mettre "AllSelectionsNoDetail" pour "When no Data".</li>
+	<li>Dans la band Detail, mettre au moins 1 fields.</li>
+</ul>

@@ -1,0 +1,38 @@
+--- 
+layout: post
+title: Configuration minimale de sendmail
+categories: 
+- administration
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254313820"
+  _edit_last: "1"
+---
+Donc pour info et très brièvement :
+<ol>
+	<li>sudo apt-get install sendmail</li>
+	<li>Définir correctement le nom de la machine ex: tigre.kiecoorp.fr
+<ul>
+	<li>sudo hostname tigre.kiecoorp.fr et</li>
+	<li>sudo vim /etc/hostname</li>
+</ul>
+</li>
+	<li>Ensuite décrire le serveur sendmail comme un smarthost, suivre les informations décrites sur cette page : <a href="http://www.joshfrank.com/articles/sendmail_smart_host">doc smart host</a><br />
+
+<p>en résumé :</p>
+<ol>
+	<li>Rajouter : define(`SMART_HOST', `smtp.orange.fr') # à la fin du fichier sendmail.mc et le convertir en cf.</li>
+<li>
+$ sudo m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf <br />
+$ sudo /etc/init.d/sendmail restart
+</li>
+</ol>
+</li>
+	<li>Dernière opération ouvrir le port 25 du routeur.</li>
+</ol>
+
+<p>Et ensuite, roulez jeunesse ... </p>

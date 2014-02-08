@@ -1,0 +1,21 @@
+--- 
+layout: post
+title: "Probl\xC3\xA8me de droits de fichier avec Apache et Plesk"
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1283261348"
+  _edit_last: "1"
+---
+Tout simplement il suffit de mettre la variable safe_mode à off en cas de soucis d'écriture des caches, logs et autre, notamment avec le framework symfony qui utilise la version module et cgi de php pour créer ces fichiers de cache et ou un conflit de droit apparait.
+
+Donc dans le VirtualHost : 
+
+<pre lang="shell">php_admin_flag safe_mode off</pre>
+
+J'ai perdu quelques heures, mais bon ...

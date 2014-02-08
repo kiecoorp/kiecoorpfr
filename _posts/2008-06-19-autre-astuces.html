@@ -1,0 +1,76 @@
+--- 
+layout: post
+title: Astuces multiples
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254314469"
+  _edit_last: "1"
+---
+<ul>
+	<li> export DISPLAY=cougar:0.0  pour l'affichage de tigre sur cougar</li>
+	<li>Un script permettant d'initialiser correctement un Projet Trac a été dévellopé il est dans /mnt/work/TRAC : DefautTrac.sh</li>
+	<li>Le  répertoire PROJETS  doit appartenir à www-data pour TRAC</li>
+	<li>Attention lors du relancement du serveur :
+<ul>
+	<li>lancer samba serveur</li>
+	<li>Monter /mnt/sauv (sinon il met la sauvegarde sur /)</li>
+	<li>Lancer le serveurtightvncserver par la commande   tightvncserver</li>
+</ul>
+</li>
+	<li>Création SVN et TRAC d'un nouveau projet
+<ul>
+	<li><a href="http://www.destination-linux.org/article52.html">Article </a></li>
+</ul>
+</li>
+	<li>L'installation de vtiger est simple sur debian :  il suffit de télécharger sur sourceforge la version tg.z du source. de copier ce source sur la racine de root de apache (SITES_WEB). Et de lancer le fichier</li>
+	<li>install.php</li>
+	<li>Pour changer la case des nom de fichiers :
+<ul>
+<pre lang="bash">ls -1 | awk '{print ";mv ";$1"; "; tolower($1)}' | sh (pour lower),
+ls -1 | awk '{print ";mv ";$1"; "; toupper($1)}' | sh (pour upper).</pre>
+</ul>
+</li>
+	<li>Pour umount sans soucis du device busy :
+<ul>
+<pre lang="bash">fuser -km /mnt/sauv</pre>
+</ul>
+</li>
+	<li> <em>Lors des soucis avec le son pour observer les programmes qui utilise le son :
+</em>
+<pre lang="bash"> fuser -v /dev/snd/*</pre>
+<em> </em></li>
+	<li>Montage des partitions NFS (Ne pas oublier l'autorisation dans /etc/exports et de relancer le daemon /etc/init.d/nfs-user...).
+<ul>
+<pre lang="bash">tigre:/mnt/work  /mnt/work       nfs    rw            0       0
+tigre:/mnt/perso /mnt/perso      nfs    rw            0       0</pre>
+</ul>
+</li>
+	<li>Convert ^M windows en fin de ligne unix avec vim</li>
+</ul>
+If the ^M character is showing up in files while opening the file
+concerned, then follow these steps to convert it to a new line.
+In vi use the following:
+<div>
+<pre lang="bash">:%s/^M/\n/g</pre>
+or with perl on the command line:
+<pre lang="bash">$ perl -pi.bak -e ’s/^M/\n/g’</pre>
+NOTE: Be sure to create the ^M by typing ctrl+V followed by ctrl+M.
+
+^M is ASCII 13 (Ctrl+M), which is the carriage return.
+
+Different operating systems use different symbols to set the end of a line/new line.
+
+Unix uses newline (\n)
+
+Mac uses carriage return (\r)
+
+And Windows/DOS use both (\n\r)
+
+To prevent the ^M from showing up in files, be sure to use the ASCII (text) mode when transfering text files.</div>
+<!-- Social Bookmarking Reloaded BEGIN -->

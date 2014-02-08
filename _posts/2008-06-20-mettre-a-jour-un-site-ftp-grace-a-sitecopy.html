@@ -1,0 +1,61 @@
+--- 
+layout: post
+title: "Mettre \xC3\xA0 jour un site FTP gr\xC3\xA2ce \xC3\xA0 sitecopy"
+categories: 
+- administration
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254314240"
+  _edit_last: "1"
+---
+Juste une petite info, pour vous dire que je viens de trouver/essayer un petit utilitaire en ligne de commande permettant de mettre à jour un site web distant par FTP : <b>sitecopy</b>.  <br />
+
+<h2>Installation (Debian like) </h2>
+<pre>sudo apt-get install sitecopy</pre>
+
+<h2>Utilisation </h2>
+L'utilisation est ultra simple, on créé d'abord les répertoires nécessaire pour stocker les configurations des sites (local/distant) et les infos sur les versions de fichiers (local/distant).
+
+<pre lang="bash">
+mkdir -m 700 ~/.sitecopy
+touch ~/.sitecopyrc
+chmod 600 ~/.sitecopyrc
+</pre>
+
+On défini ensuite un site :
+<pre lang="bash">
+site NOM_SITE
+server 192.168.0.1
+remote /httpdocs/SITE #répertoire distant
+local /mnt/work/SITES_WEB/SITE # répertoire local
+protocol FTP
+username  user
+password pwd2007
+exclude *.bak
+exclude *~
+exclude #*#
+ignore database.php
+ignore config.php
+</pre>
+
+Si le site est déjà en place et à jour :
+
+On synchronise local/distant
+<pre lang="bash"># sitecopy --catchup NOM_SITE</pre>
+
+Si le site distant n'existe pas encore(assurez-vous que l'administrateur ait bien créé la racine du site distant) :
+
+<pre lang="bash">sitecopy --init NOM_SITE </pre>
+
+Après chaque modif :
+
+<pre lang="bash">#sitecopy --update NOM_SITE</pre>
+
+L'énorme avantage que je trouve à ce logiciel est avant tout la rapidité et la simplicité. <br />
+
+<q>Cet article est basé/inspiré sur la manpage de sitecopy en français.</q>

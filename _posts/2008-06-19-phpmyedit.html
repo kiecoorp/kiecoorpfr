@@ -1,0 +1,20 @@
+---
+layout: post
+title: Utilisation de PHPMyEdit dans CodeIgniter
+categories:
+- administration
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1254314275"
+  _edit_last: "1"
+---
+Afin de se connecter dans les mêmes dispositions qu'avec code igniter, j'ai rajouté la ligne :
+{% highlight php %}
+@mysql_query("SET NAMES 'utf8' COLLATE 'utf8_general_ci'", $this->dbh);
+{% endhighlight %}l
+dans le fichier phpMyEdit.class.php à la ligne 2924;

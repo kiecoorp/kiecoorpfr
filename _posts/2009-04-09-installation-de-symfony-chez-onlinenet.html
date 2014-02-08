@@ -1,0 +1,35 @@
+--- 
+layout: post
+title: Installation de symfony chez online.net
+categories: 
+- administration
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254313791"
+  _edit_last: "1"
+---
+<h2>Pour commencer mes principales sources d'information :</h2>
+<h4><a href="http://faq.online.net/hebergement-web/php"></a></h4>
+<h4>
+<ul>
+	<li>pour l'activation du php5 dans le .htaccess</li>
+	<li>ne pas mettre l'option followlink qui est activé par défault</li>
+</ul>
+<a href="http://forx.fr/post/2008/05/10/Test-installation-Symfony-sur-OVH"></a> =&gt;  pour indiquer le nom du répertoire public à symfony (web  =&gt; '') le faire dans le rep apps/frontend et apps/backend</h4>
+<h2>Mes moments d'improvisation</h2>
+<h3>.htaccess</h3>
+Ensuite j'ai commenter la ligne
+
+# Options +FollowSymLinks +ExecCGI
+
+du fichier .htaccess car elle générait une erreur 500
+<h3>index.php, backend.php, frontend.php</h3>
+Faire ce qu'il ne faut pas faire j'ai déplacer les répertoire de symfony dans www et j'ai modifier le fichier index.php pour indiquer la bonne racine.
+
+Il faut également modifier les liens symboliques situé dans www
+<h3>Bien vider le cache à chaque modif !!!</h3>
+<h3>Reprendre le site sauvegardé ...</h3>

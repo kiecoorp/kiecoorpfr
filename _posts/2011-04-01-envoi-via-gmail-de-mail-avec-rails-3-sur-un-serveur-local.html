@@ -1,0 +1,21 @@
+--- 
+layout: post
+title: Envoi via Gmail de mail avec RAILS 3 sur un serveur local
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_last: "1"
+  _edit_lock: "1301647240"
+---
+Après avoir essayé de configurer un serveur local avec sendmail pour l'envoi via un smart_host (smtp.orange.fr) je me suis rabattu sur gmail, et la ce fut beaucoup beaucoup plus simple.
+
+1 - J'ai créé un compte gmail générique à ma société : mail.societe@gmail.com par exemple.
+2 - j'ai ajouté un email dans la section Comptes et importation =&gt; "envoyer des emails en tant que". Afin de pouvoir envoyer des emails avec un "from" correspondant au client.
+3 - J'ai configurer RAILS 3 avec les paramètres du compte GMAIL. (par exemple <a href="http://lindsaar.net/2010/3/15/how_to_use_mail_and_actionmailer_3_with_gmail_smtp" target="_blank">ici</a>)
+
+Et ça marche !!

@@ -1,0 +1,19 @@
+--- 
+layout: post
+title: "Ruby On Rails : delete \xC3\xA0 la place de destroy"
+categories: 
+- avertissement
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254313987"
+  _edit_last: "1"
+---
+Suite à une grosse bourde sur la mise en place de la newsletter de kartcom, remarque ultra importante :
+<ul>
+	<li><strong>ActiveRecord::destroy </strong>: Détruit l'objet et tout les objets qui lui sont ratachés avec la structure de la base. Peu engendré la suppression d'une infinité d'élément dans la base en cas de relation 1:N (par exemple).</li>
+	<li><strong>ActiveRecord::delete</strong> : Détruit uniquement l'objet, concrètement supprime son enregistrement dans la base, ne modifie pas les enregistrements sur les autres tables liés initialement à l'objet.</li>
+</ul>

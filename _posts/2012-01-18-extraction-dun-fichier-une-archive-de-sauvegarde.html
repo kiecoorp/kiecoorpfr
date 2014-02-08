@@ -1,0 +1,32 @@
+---
+layout: post
+title: Extraction d'un fichier une archive de sauvegarde
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1326879130"
+  _edit_last: "1"
+---
+On récupère la liste des fichiers de l'archive (le chemin complet est nécessaire pour une extraction d'un seul fichier). On peut filtrer avec grep ou autre :
+
+{% highlight bash %}
+tar -tf mon_archive.tar.gz
+{% endhighlight %}
+
+On extrait le ou les fichiers(avec les *) avec la commande :
+
+{% highlight bash %}
+tar -xvf mon_archive.tar.gz "*.jpg"
+{% endhighlight %}
+
+ou
+
+{% highlight bash %}
+tar -xvf mon_archive.tar.gz "/le/bon/chemin/mon_fichier.doc"
+{% endhighlight %}
+

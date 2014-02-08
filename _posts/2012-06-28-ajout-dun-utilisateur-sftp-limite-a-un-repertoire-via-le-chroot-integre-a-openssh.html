@@ -1,0 +1,50 @@
+---
+layout: post
+title: "Ajout d'un utilisateur SFTP limit\xC3\xA9 \xC3\xA0 un r\xC3\xA9pertoire via le chroot int\xC3\xA9gr\xC3\xA9 \xC3\xA0 openssh"
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1340884833"
+  _edit_last: "1"
+---
+Le serveur openssh permet de chrooter un compte de manière relativement simple tout se joue dans le fichier : /etc/ssh/sshd_config.
+
+On a créé le compte client_accces :
+
+{% highlight bash %}
+adduser client_access
+{% endhighlight %}
+
+il  faut changer les lignes :
+{% highlight bash %}
+# SubSystem sftp /usr/lib/openssh/sftp-server
+{% endhighlight %}
+par :
+{% highlight bash %}
+SubSystem sftp internal-sftp
+{% endhighlight %}
+et rajouter une règle qui s'applique à l'utilisateur (ou peu également travailler par group) :
+{% highlight bash %}
+Match user client_acces
+        # The following two directives force client_acces to become chrooted
+        # and only have sftp available.  No other chroot setup is required.
+        ChrootDirectory /home/www/client_acces/
+        ForceCommand internal-sftp
+        # For additional paranoia, disallow all types of port forwardings.
+        AllowTcpForwarding no
+        GatewayPorts no
+        X11Forwarding no
+{% endhighlight %}
+
+Le point important découvert grâce au suivi des logs tail -f /var/log/auth.log (ou éventuellement tail -f /var/log/syslog) :
+
+L'ensemble des répertoires et sous répertoires doivent apartenir à root  /home /home/www et /home/www/client_acces/, ensuite on créé les répertoires dont le propriétaire devient client_acces.
+
+
+
+

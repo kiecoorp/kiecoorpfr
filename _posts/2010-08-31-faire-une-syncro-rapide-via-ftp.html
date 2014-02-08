@@ -1,0 +1,32 @@
+---
+layout: post
+title: Faire une syncro rapide via FTP
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1297788188"
+  _edit_last: "1"
+---
+Il faut utiliser le logiciel LFTP qui est un logiciel FTP amélioré disponible sur les distribution linux. Voici les deux commandes que j'ai récupérer sur un forum et qui marche très bien :
+
+La solution est effectivement dans LFTP (peux être une nouvelle version) "Voir":http://doc.ubuntu-fr.org/lftp
+
+Mise à jour de votre site Internet modifié localement (Upload recursif)
+
+{% highlight bash %}
+lftp ftp://identifiant:mot_de_passe@site_de_connexion -e "mirror -e -R -x dossier_ignoré -x dossier_ignoré /emplacement_local /emplacement_distant ; quit"
+{% endhighlight %}
+
+Sauvegarde sur votre ordinateur de votre site Internet (download recursif)
+{% highlight bash %}
+lftp ftp://identifiant:mot_de_passe@site_de_connexion -e "mirror -e -x dossier_ignoré -x dossier_ignoré /emplacement_distant /emplacement_local ; quit"
+{% endhighlight %}
+
+J'espère que ça servira aux nouveaux qui cherchent et qui tombe sur ce post (trop bien référencé) qui restait sans solution
+
+Le top est de transférer du serveur de test directement au serveur de production. Et là les débits sont enormes.

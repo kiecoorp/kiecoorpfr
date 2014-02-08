@@ -1,0 +1,57 @@
+---
+layout: post
+title: "Configuration SVN pour un acc\xC3\xA9s http classique."
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1263215665"
+  _edit_last: "1"
+---
+Lors de l'installation d'un client svn dans une entreprise j'ai été confronté au fait que le port 22 était bloqué. J'ai donc configuré apache2 avec le mode dav_svn pour accéder à mes repository par le protocole : http.
+
+Plusieurs étapes pour configurer ce mode :
+
+1 - Créer le fichier de mot de passe  et l'utilisateur 'user' pour apache:
+
+{% highlight bash %}
+$ sudo htpasswd -c /etc/apache2/dav_svn.passwd user
+$ password: votre_mot_de_passe
+{% endhighlight %}
+2 - configurer le mod dav_svn :
+
+{% highlight bash %}
+vim /etc/apache2/mods-available/dav_svn.conf
+{% endhighlight %}
+
+{% highlight xml %}
+## Lire les commentaires du fichiers vous permettra de comprendre les différents paramètre.
+<Location /svn>
+DAV svn
+SVNParentPath /var/lib/SVN
+AuthType Basic
+AuthName "Subversion Repository"
+AuthUserFile /etc/apache2/dav_svn.passwd
+</Location>
+{% endhighlight %}
+
+3 - activer le module dav_svn et reload apache
+
+{% highlight bash %}
+$ a2enmode dav_svn.load
+$ /etc/init.d/apache2 reload
+{% endhighlight %}
+
+4 - Pour récupérer un checkout
+{% highlight bash %}
+$ svn co http://user:votre_mot_de_passe@ip_or_adresse_serveur/svn/REP_DU_REPOSITORY
+{% endhighlight %}
+
+par exemple si l'adresse complète est /var/lib/svn/MON_PROJET => REP_DU_REPOSITORY = MON_PROJET
+
+PS : j'ai eu des soucis de connexion sur certains répertoires (SVN) qui étaient propriétaires de 'root', j'ai donc changé le propriétaire de ces répertoires. Je ne sais pas d'où vient le fait que certains rep marchaient et d'autre pas.
+

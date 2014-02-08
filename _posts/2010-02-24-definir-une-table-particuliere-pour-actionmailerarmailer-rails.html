@@ -1,0 +1,39 @@
+--- 
+layout: post
+title: "D\xC3\xA9finir une table particuli\xC3\xA8re pour ActionMailer::ARMailer (Rails)"
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1267008922"
+  _edit_last: "1"
+---
+Faisant évoluer un projet déjà existant et comportant une table email ... il m'a fallut modifier la table de base de ARMailer, rien de bien sorcier mais bon ... ça fera toujours gagner un peu de temps à certaine personne enfin j'espère :).
+
+Les lignes de commande spéciales  :
+
+<ul>
+	<li>ar_sendmail --create-migration --table-name ar_emails</li>
+	<li>ar_sendmail --create-model --table-name ar_emails</li>
+</ul>
+<strong>et surtout dans le environment.rb en fin de fichier.</strong>
+
+<pre lang="ruby">
+require 'action_mailer/ar_mailer'
+ActionMailer::Base.delivery_method = :activerecord
+ActionMailer::ARMailer::email_class = ArEmail
+</pre>
+
+et pour les commandes :
+<pre lang="bash">
+$ar_sendmail -t ArEmail --mailq
+</pre>
+
+
+Pour plus de compréhension, je vous incite à lire la doc  <a href="http://seattlerb.rubyforge.org/ar_mailer/ActionMailer/ARMailer.html" target="_blank">http://seattlerb.rubyforge.org/ar_mailer/ActionMailer/ARMailer.html</a>.
+
+Pour les questions et le peu de personne qui passe par ici merci d'utiliser la page contact.

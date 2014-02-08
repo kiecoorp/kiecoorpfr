@@ -1,0 +1,34 @@
+--- 
+layout: post
+title: "Remettre un ex\xC3\xA9cutable syst\xC3\xA8me sur une distribution d'architecture debian."
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254314124"
+  _edit_last: "1"
+---
+<h3>Explication</h3>
+
+<p>Après une fausse manip ma commande <strong>/bin/rm</strong> a disparue de mon serveur basé sur une distrib debian sarge. Et là soucis car impossible de faire fonctionner correctement les outils de gestion de paquets (apt-get, synaptic, ...) sans cette commande. Donc pas d'install de paquet, de MAJ et impossibilité de corriger le problème.</p>
+
+<h4>Eléments nécessaires</h4>
+
+<p>Pour arriver à corriger ce soucis il vous faut récupérer le paquet associé au fichier. Généralement la fin de la commande man vous indique le nom de ce paquet (Cf image).</p>
+
+<p><img src="/images/man_rm_coreutils.png" alt="Connaître le paquet associé à une commande" style="display:block; margin:0 auto;" /></p>
+
+<p>Vous pouvez ensuite récupérer le fichier manquant grâce à la commande dpkg.</p>
+
+<h4>Deux exemples de solutions</h4>
+
+<ul>
+<li>La commande <code>dpkg -x paquet.deb rep</code> va vous extraire l'ensemble des fichiers du paquet dans le répertoire rep.</li>
+<li>La commande <code>dpkg --fsys-tarfile paquet.deb | tar -xf - rm*</code> vous permet d'extraire uniquement les fichiers rm*.</li>
+</ul>
+
+<p>Vous copiez/collez ensuite le fichier manquant.</p>

@@ -1,0 +1,22 @@
+--- 
+layout: post
+title: "Adresse SVN distant via SSH et s\xC3\xA9curisation TRAC"
+categories: 
+- administration
+- astuces
+tags: []
+
+status: private
+type: post
+published: false
+meta: 
+  _edit_lock: "1254314426"
+  _edit_last: "1"
+---
+J'ai modifié TRAC et SVN pour autoriser l'accés uniquement à kie et denis. La gestion des mots de passe se fait via l'outil : htpasswd2 dont la commande est :
+<pre lang="bash">htpasswd2 - c dav_svn.passwd kie</pre>
+Ces mots de passe sont stocké dans les fichiers /etc/apache2/mods-enabled/dav_svn.passwd
+
+Récupérer un checkout via ssh sur smilodon :
+<pre lang="bash">svn co svn+ssh://root@91.121.115.144/var/SVN/SimpleMailing/trunk SimpleMailing</pre>
+Il suffit de mettre ensuite le mot de passe root.

@@ -1,0 +1,27 @@
+--- 
+layout: post
+title: Perte de mappage avec templatevoila sur Typo3
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254313734"
+  _edit_last: "1"
+---
+Lors d'une modification de la template(fichier html), une mise à jour est nécessaire dans la partie admin, <span style="color: #ff0000;">il faut impérativement faire  TemplateVoila -&gt; Selection de la template -&gt; Update Mapping -&gt; Modif TS/TO dans un premier temps puis faire save sans avoir rien touché pour récupérer la nouvelle version de la template.</span>
+<h3>Modif du header</h3>
+Aprés avoir mise à jour la nouvelle template, il suffit d'aller sélectionner la nouvelle balise meta dans la partie TemplateVoila -&gt; Selection de la template -&gt; Update Mapping.
+<h2>En cas de perte de mappage ...</h2>
+Pour ma part j'ai :
+<ul>
+	<li>le root sur la balise body</li>
+	<li>la content sur la div.page</li>
+	<li>actu =&gt; #zone_1 div.actu</li>
+	<li>agenda =&gt;  #zone_2 div.agenda</li>
+	<li>Les x menu sur div#smenu</li>
+	<li>le flash sur div#flash</li>
+</ul>

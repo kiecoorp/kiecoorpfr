@@ -1,0 +1,54 @@
+--- 
+layout: post
+title: "S\xC3\xA9curiser l'acc\xC3\xA9s a un serveur ubuntu : ufw (firewall)"
+categories: 
+- administration
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254314917"
+  _edit_last: "1"
+---
+Je croyais être à l'abri et vlan des ips qui reviennent sans cesse sur mon serveur dédié, après une petite recherche  : des serveurs pour WOW.  Il a fallu mettre les moyens nécessaires en place, j'ai donc bloqué les adresses ip, ouvert uniquement les ports nécessaires 80, 21, 22, 25 et lancer le firewall ufw, d'utilisation ultra simple :
+<h3>Recherche des éventuels IP indésirable :</h3>
+Quand mon serveur rame je recherche les derniers accés sur celui ci (100 dernière lignes du fichier access.log) :
+
+tail -n 100 /var/log/apache2/access.log
+<h3>Parefeu SWF (Réf <a href="http://www.paperblog.fr/761825/les-commandes-shell-les-plus-utils-pour-ubuntu/" target="_blank">paper blog </a>)</h3>
+<ul>
+	<li> ufw enable – Activer le parefeu</li>
+	<li>ufw disable – Désactiver le parefeu</li>
+	<li>ufw default allow – Autoriser toutes les connexions par défaut</li>
+	<li>ufw default deny – Bloquer toutes les connexions par défaut</li>
+	<li>ufw status – Afficher le status du parefeu</li>
+	<li>ufw allow port – Autoriser un port</li>
+	<li>ufw deny port – Bloquer un port</li>
+	<li>ufw deny from ip – bloquer une adresse IP</li>
+</ul>
+<h3>Attention !!</h3>
+Il f aut bien penser a ouvrir au moins le port 22 (SSH) si vous êtes un serveur dédié sinon vous ne pourrez plus vous y reconnecter. <span style="color: #ff0000;">Super Super important.</span> Et bien sur au moins les ports 80 et 21 pour l'accés au web et le ftp. Faites cela avant d'activer le firewall.
+<h3>Pour en faire plus ... généralement c'est nécessaire</h3>
+<a href="http://prendreuncafe.com/blog/post/2007/02/05/Securiser-son-Ubuntu-server" target="_blank">Sécuriser son Ubuntu-server Par NiKo</a>, de ce que j'ai retenu et réalisé j'ai installé en plus de ufw : fail2ban, <a href="http://kubuntu.free.fr/blog/index.php/2006/10/23/136-logwatch-surveiller-ses-log-par-email" target="_blank">logwatch</a>, et chkrootkit et comme on dit qui vivra verra ...
+<h3>Apache, par ce que oui tout le monde pouvaient voir mes fichiers !!! (comme la config de la db par exemple).</h3>
+<h4>Configurer le comportement des répertoires visibles de l’extérieur</h4>
+Pour l’ensemble de la sous-arborescence du répertoire défini par la directive “<code>DocumentRoot</code>“, il est important de configurer le comportement que doit avoir Apache pour toutes les requêtes clientes. Pour faire cela, il suffit de rajouter à la configuration d’Apache, la directive suivante :
+<pre><code>&lt;Directory / &gt;                            (1)
+    Options -Indexes -FollowSymLinks      (2)
+    AllowOverride None                    (3)
+    Order allow,deny                      (4)
+    Allow from all                        (5)
+&lt;/Directory&gt;</code></pre>
+<strong>(1) :</strong> Le ‘/’ indique que la directive concerne l’arborescence contenue sous la racine des documents Apache.
+
+<strong>(2) :</strong> Cette directive permet de refuser le listing des fichiers/sous-répertoires et de suivre les liens symboliques (le prefix ‘-’ refuse, tandis que le prefix ‘+’ accepte l’option)
+
+<strong>(3) :</strong> Cette directive permet de refuser la modification des règles définies sur ce répertoire par un fichier <code>.htaccess</code>
+
+<strong>(4) :</strong> Cette directive permet d’indiquer l’ordre des règles pour autoriser/interdire des accès (dans notre cas on accepte tout le monde)
+
+<strong>(5) :</strong> Autorisation de l’accès par tout le monde
+
+Si vous souhaitez, modifier ce comportant pour un sous-répertoire particulier, il suffit de copier la même directive en modifiant le chemin :

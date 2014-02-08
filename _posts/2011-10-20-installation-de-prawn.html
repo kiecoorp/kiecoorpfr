@@ -1,0 +1,58 @@
+---
+layout: post
+title: Installation de Prawn
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1319113626"
+  _edit_last: "1"
+---
+La version de Prawn 1.0.0 RC1 est sortie, mais dans un premier temps je vais utiliser la version 0.12. Dans mon Gemfile je rajoute donc les lignes suivantes :
+
+{% highlight ruby %}
+# Création des pdfs
+gem 'prawn'
+gem 'prawn_rails'
+{% endhighlight %}
+
+
+un petit :
+
+{% highlight bash %}
+$ bundle install
+{% endhighlight %}
+
+Je créé une vue :  views/…/simple.pdf.prawn
+
+Dans laquelle je place :
+
+{% highlight ruby %}
+prawn_document() do |pdf|
+  pdf.text "Hello World"
+end
+{% endhighlight %}
+
+et
+
+par magie quand je pointe sur l'adresse index.pdf il me propose le PDF avec le "Hello Word".
+
+Pour l'instant simple et efficace. A savoir que j'utilise en prod PdfKit, mais que je rencontre des soucis de présentation entre Linux et Windows, c'est donc pour cela que je tente Prawn.
+
+<strong>NB :</strong> Vue qu'une doc bien faites est apparemment sortie (<a href="http://blog.escarworld.com/post/2011/10/18/Gem-prawn-pdf-pour-rails-%3A-enfin-une-vrai-documentation" target="_blank">voir cet article</a>), je viens d'installer la 1.0.0.rca :
+
+{% highlight ruby %}
+# Création des pdfs
+gem 'prawn'
+gem 'prawn_rails'
+{% endhighlight %}
+
+puis si vous aviez déjà une autre version d'installée :
+
+{% highlight bash %}
+$ bundle update prawn
+{% endhighlight %}

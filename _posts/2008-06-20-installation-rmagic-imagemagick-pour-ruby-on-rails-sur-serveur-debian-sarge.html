@@ -1,0 +1,50 @@
+--- 
+layout: post
+title: Installation RMagic, ImageMagick pour Ruby on rails sur serveur Debian Sarge
+categories: 
+- administration
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254314211"
+  _edit_last: "1"
+---
+<p>Ayant le besoin de manipuller des images sur mon site rails j'ai décidé d'utilser les outils proposés par la librairie ImageMagick. Deux plugins sont disponibles pour rails&nbsp;:</p>
+
+<pre> * <a href="http://rmagick.rubyforge.org/">RMagick</a>
+* <a href="http://vantulder.net/rails/magick/">ImageMagick pour Rails</a></pre>
+
+<p>Le second nécessitant l'installation du premier.</p>
+
+<p>Avant tout il faut installer les packages suivant sur la Debian Sarge&nbsp;:</p>
+
+<pre lang="php"> * imagemagick
+* libmagick6
+* libmagick6-dev
+* librmagick-ruby1.8</pre>
+
+<p>Le package 'libmagick6-dev' est nécessaire pour le bon fonctionnement de l'opération.</p>
+
+<h5>installation en local</h5>
+
+<p>Il faut ensuite récupérer les deux gems&nbsp;:</p>
+
+<pre>* <a href="http://rubyforge.org/projects/rmagick/">Rmagick gem </a>
+* <a href="http://vantulder.net/rails/magick/gems/actionpack-imagemagick-0.4.gem">ImageMagick gem </a></pre>
+
+<p>Que l'on installe avec les commande <strong>gem install 'Chemin_du_gem'</strong></p>
+
+<h5>installation automatique</h5>
+
+<p>Une fois les bons packages Debian installés on peut également lancer les commandes&nbsp;:</p>
+
+<blockquote><p><em><pre lang="php">gem install rmagick</pre></em></p></blockquote>
+
+<p>puis</p>
+
+<blockquote><p><em><pre lang="php">gem install actionpack-imagemagick</pre></em></p></blockquote>
+
+<p>NB&nbsp;: <em>Lors de mon installation, la première partie de cet <a href="http://blog.pomozov.info/posts/adventure-with-rmagick-and-mongrel.html">article </a> m'a bien aidé.</em></p>

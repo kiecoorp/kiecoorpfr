@@ -1,0 +1,29 @@
+---
+layout: post
+title: "Changer le nom de domaine d\xE2\x80\x99un blog sous wordpress"
+categories:
+- administration
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1254387013"
+  _edit_last: "1"
+---
+<p>Bon ceci est un simple résumé des commandes sql de l'article éponyme de <a href="http://www.2803.fr/wordpress/changer-le-nom-de-domaine-dun-blog-sous-wordpress-2695/" target="_blank">2803</a> :</p>
+
+{% highlight sql %}
+UPDATE wp_options SET option_value = replace(option_value, 'http://www.old-domain.com', 'http://www.new-domain.com') WHERE option_name = 'home' OR option_name = 'siteurl';
+UPDATE wp_posts SET guid = replace(guid, 'http://www.old-domain.com','http://www.new-domain.com');
+UPDATE wp_posts SET post_content = replace(post_content, 'http://www.old-domain.com', 'http://www.new-domain.com');
+UPDATE wp_postmeta SET meta_value = replace(meta_value, 'http://www.old-domain.com', 'http://www.new-domain.com');
+{% endhighlight %}
+
+<p>Pour les dossiers : </p>
+
+{% highlight sql %}
+UPDATE wp_postmeta SET meta_value = replace(meta_value, 'old-domain.com', 'new-domain.com');
+{% endhighlight %}

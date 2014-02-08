@@ -1,0 +1,79 @@
+---
+layout: post
+title: Rappels sur git
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1320058063"
+  _edit_last: "1"
+---
+Plusieurs articles intéressants :
+
+Guide : <a title="Guide d'utilisation" href="http://www.sourcemage.org/Git_Guide" target="_blank">http://www.sourcemage.org/Git_Guide</a>
+Turorial : <a title="Tutorial" href="http://toolmantim.com/articles/setting_up_a_new_remote_git_repository" target="_blank">http://toolmantim.com/articles/setting_up_a_new_remote_git_repository</a>
+
+A titre perso ma façon de voir/comprendre les choses :
+
+Pour utiliser un repository distant et un local (même archi que svn grosso modo)
+<ol>
+  <li>Créer un répository distant vierge (git --bare init)</li>
+  <li>Créer un respository local avec les fichiers (git init)</li>
+  <li>Add the remote repository to your existing local git repo and push:</li>
+</ol>
+Sur le serveur central/remote git
+
+{% highlight bash %}
+$ cd /var/GIT
+$ mkdir projet.git
+$ cd projet.git
+$ git --bare init
+$ cd ..
+$ chown -R dev-user:dev-user projet.git
+{% endhighlight %}
+Sur le pc local (ou les fichiers du projets sont stockés au départ) :
+
+{% highlight bash %}
+$ cd ~/Sites/myapp
+$ git init
+$ git add .
+$ git commit -a -m "Initital commit"
+$ git remote add origin ssh://dev-user@myserver.com/var/GIT/projet.git
+$ git push origin master
+{% endhighlight %}
+
+Pour une utilisation multisite, sur un nouveau serveur
+
+{% highlight bash %}
+  git clone ssh://dev-user@myserver.com/var/GIT/projet.git
+  git commit -a
+  git push #pour envoyer les modifs sur le serveur (origine master doit être optionnel si pas d'autre branche)
+  git pull  # pour les récupérer  (origine master doit être optionnel si pas d'autre branche)
+{% endhighlight %}
+Pour un rappel <strong>précis</strong> sur le git ignore : <a href="http://help.github.com/ignore-files/" target="_blank">GitHub : Git Ignore</a>.
+<h2>Faire un copie/fork d'un repository</h2>
+J'ai développé une base commune pour deux applications et arrive le moment ou je souhaite gérer le code sur deux repository(s) distincts.
+<ol>
+  <li>Donc je créé un repository vierge sur le serveur.</li>
+  <li>En local je copie mon repertoire de travail</li>
+  <li>Je change  l'origin du repository dans ce nouveau repertoire.</li>
+{% highlight bash %}
+$ cd $myotherproject
+$ git remote rm origin
+$ git remote add origin ssh://dev-user@smilodon/var/GIT/erp.git
+{% endhighlight %}
+  <li>Je push les nouveaux fichiers dans le repository vierge</li>
+</ol>
+{% highlight bash %}
+$ git push origin master
+{% endhighlight %}
+<h2>Convertion de SVN vers GIT</h2>
+On va pas faire de long discours je me suis servi de <a href="http://john.albin.net/git/convert-subversion-to-git" target="_blank">cette procédure</a> et ça à l'air de bien marcher pour moi.
+
+<h2>Utilisations des submodules</h2>
+
+Les submodules permettent d'intégrer un repos git à l'intérieur d'un autre de manière propre, un petit peu à la manière d'un svn:external. Quelques infos <a href="http://blog.shingara.fr/git-submodule-presque-le-svn-externals-de-git.html" target="_blank">sur cette page</a>.

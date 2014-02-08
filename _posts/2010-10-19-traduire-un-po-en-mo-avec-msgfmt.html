@@ -1,0 +1,23 @@
+---
+layout: post
+title: Traduire un po en mo avec msgfmt
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1287478922"
+  _edit_last: "1"
+---
+De nombreux outils web utilisant php (framework, cms) dont wordpress utilise l'outil gettext pour traduire leur chaîne de texte.
+
+Les traductions sont placées dans des fichiers compilés(mo) obtenues a partir de fichier texte (po) que l'on édite soit même. La commande pour compiler un fichier est :
+
+{% highlight bash %}
+msgfmt -o traduction_FR.mo traduction_FR.po
+{% endhighlight %}
+
+Je rappelle que nous sommes sous une distribution linux ubuntu et que les paquetages de gettext ont été installé.

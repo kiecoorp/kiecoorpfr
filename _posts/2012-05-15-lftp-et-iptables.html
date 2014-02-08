@@ -1,0 +1,42 @@
+---
+layout: post
+title: lftp et iptables
+categories:
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta:
+  _edit_lock: "1340877650"
+  _edit_last: "1"
+---
+Suite à l'utilisation de lftp pour une faire une syncro d'un de mes projets j'ai eu un soucis particulier, je me connectais rapidement mais rien derrière aucune info sur le shell et aucune commande ne passait. Après réflexion et quelques tests, j'ai compris que cela venais de ma config iptables :
+
+Voici la version temporaire (j'imagine qu'il y a pas mal de redondance), mais qui marche :
+
+{% highlight bash %}
+# FTP Out
+modprobe ip_conntrack
+modprobe ip_conntrack_ftp
+
+iptables -t filter -A OUTPUT -p tcp --dport 20:21 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+
+# FTP In
+iptables -t filter -A INPUT -p tcp --dport 20:21 -j ACCEPT
+iptables -t filter -A INPUT -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+{% endhighlight %}
+
+Pour la petite anecdote, et la compréhension ma syncro lftp (mode mirror), c'est mise à marcher lorsque j'ai rajouter le "NEW" dans le --state du OUTPUT. Ceci restant complètement flou pour moi.
+
+A noter la commande :
+{% highlight bash %}
+sudo iptables -L -n --line-numbers
+{% endhighlight %}
+
+qui m'a effectivement permis de vérifier que les règles iptables étaient bien misent à jour après :
+{% highlight bash %}
+/etc/init.d/firewall stop / start.
+{% endhighlight %}

@@ -1,0 +1,16 @@
+--- 
+layout: post
+title: Comment pointer sur une page par le biais du shell avec wget
+categories: 
+- astuces
+tags: []
+
+status: publish
+type: post
+published: true
+meta: 
+  _edit_lock: "1254386684"
+  _edit_last: "1"
+---
+Il est parfois intéressant de pouvoir accéder/clicker virtuellement a une page par le biais du shell/script. Voici le petit code utilisant wget. Combiné à un petit crontab, on peut gérer l'envoi de bilan à intervalle régulier.
+<pre lang="shell">wget -O - http://www.lesite.fr/lecontrolleur/lafonction -q</pre>
