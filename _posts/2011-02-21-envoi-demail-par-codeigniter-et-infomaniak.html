@@ -1,38 +1,40 @@
---- 
+---
 layout: post
 title: Envoi d'email par Codeigniter, Symfony et Infomaniak
-categories: 
+categories:
 - astuces
 tags: []
 
 status: publish
 type: post
 published: true
-meta: 
+meta:
   _edit_lock: "1367305080"
   _edit_last: "1"
 ---
-Suite à une perte de temps de pas loin de quatre heures, je note ici les deux tips primordiaux pour l'envoi des mails par informaniak. Ils ont sécurisé au maximum l'envoi d'email par php pour éviter le spam.
-<h2>code igniter</h2>
-La principale solution est venue de ce sujet :
+<p>Suite à une perte de temps de pas loin de quatre heures, je note ici les deux tips primordiaux pour l'envoi des mails par informaniak. Ils ont sécurisé au maximum l'envoi d'email par php pour éviter le spam.</p>
 
+<h2>Codeigniter</h2>
+
+<p>La principale solution est venue de ce sujet :</p>
 <a href="http://expressionengine.com/archived_forums/viewthread/136992/P18/" target="_blank">http://expressionengine.com/archived_forums/viewthread/136992/P18/</a>
 
-Précisément cette réponse :
-<pre lang="php">
+<p>Précisément cette réponse :</p>
+
+{% highlight php %}
 //Line 54: set _safe_mode to true
 var $_safe_mode = TRUE;
 //Line 94- comment it out
-//$this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE; 
+//$this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
 //Line 130 - comment it out
-//$this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE; 
-</pre>
+//$this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
+{% endhighlight %}
 
-Ce code permet de force le safe_mode à TRUE nécessaire pour l'envoi du mail via la fonction mail() de PHP.
+<p>Ce code permet de force le safe_mode à TRUE nécessaire pour l'envoi du mail via la fonction mail() de PHP.</p>
 
-L'autre astuce aura été d'utiliser la librairie Email.php du trunk de codeigniter car informaniak ne veut plus de ligne vide dans ces headers. Plus d'explication sur la FAQ de infomaniak =&gt; <a title="que faire si j obtiens warning mail function mail permission denied headers injection empty line ou warning mail function mail" href="http://www.infomaniak.ch/support/faq/questions/que_faire_si_j_obtiens_warning_mail_function_mail_permission_denied_headers_injection_empty_line_ou_warning_mail_function_mail_p-570.html?language=french" target="_blank">FAQ Informaniak</a>
+<p>L'autre astuce aura été d'utiliser la librairie Email.php du trunk de codeigniter car informaniak ne veut plus de ligne vide dans ces headers. Plus d'explication sur la FAQ de infomaniak =&gt; <a title="que faire si j obtiens warning mail function mail permission denied headers injection empty line ou warning mail function mail" href="http://www.infomaniak.ch/support/faq/questions/que_faire_si_j_obtiens_warning_mail_function_mail_permission_denied_headers_injection_empty_line_ou_warning_mail_function_mail_p-570.html?language=french" target="_blank">FAQ Informaniak</a></p>
 <h2>Symfony et Swift(version 4.0.5)</h2>
-Le même problème d'envoi d'email vient de se présenter avec symony. La solution pour moi qui utilise Swift aura été de supprimer les options '-f%s' de extraparams dans les fichiers :
+<p>Le même problème d'envoi d'email vient de se présenter avec symony. La solution pour moi qui utilise Swift aura été de supprimer les options '-f%s' de extraparams dans les fichiers :</p>
 <ul>
 	<li>lib/vendor/swift/classes/Swift/Transport/MailTransport.php</li>
 	<li>lib/vendor/swift/classes/Swift/MailTransport.php</li>

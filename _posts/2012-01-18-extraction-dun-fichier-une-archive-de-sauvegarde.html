@@ -12,19 +12,19 @@ meta:
   _edit_lock: "1326879130"
   _edit_last: "1"
 ---
-On récupère la liste des fichiers de l'archive (le chemin complet est nécessaire pour une extraction d'un seul fichier). On peut filtrer avec grep ou autre :
+<p>On récupère la liste des fichiers de l'archive (le chemin complet est nécessaire pour une extraction d'un seul fichier). On peut filtrer avec grep ou autre :</p>
 
 {% highlight bash %}
 tar -tf mon_archive.tar.gz
 {% endhighlight %}
 
-On extrait le ou les fichiers(avec les *) avec la commande :
+<p>On extrait le ou les fichiers(avec les *) avec la commande :</p>
 
 {% highlight bash %}
 tar -xvf mon_archive.tar.gz "*.jpg"
 {% endhighlight %}
 
-ou
+<p>ou</p>
 
 {% highlight bash %}
 tar -xvf mon_archive.tar.gz "/le/bon/chemin/mon_fichier.doc"

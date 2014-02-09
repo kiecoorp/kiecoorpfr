@@ -12,23 +12,24 @@ meta:
   _edit_lock: "1340884833"
   _edit_last: "1"
 ---
-Le serveur openssh permet de chrooter un compte de manière relativement simple tout se joue dans le fichier : /etc/ssh/sshd_config.
 
-On a créé le compte client_accces :
+<p>Le serveur openssh permet de chrooter un compte de manière relativement simple tout se joue dans le fichier : <strong>/etc/ssh/sshd_config</strong>.</p>
+
+<p>On a créé le compte client_accces :</p>
 
 {% highlight bash %}
 adduser client_access
 {% endhighlight %}
 
-il  faut changer les lignes :
+<p>il  faut changer les lignes :</p>
 {% highlight bash %}
 # SubSystem sftp /usr/lib/openssh/sftp-server
 {% endhighlight %}
-par :
+<p>par :</p>
 {% highlight bash %}
 SubSystem sftp internal-sftp
 {% endhighlight %}
-et rajouter une règle qui s'applique à l'utilisateur (ou peu également travailler par group) :
+<p>et rajouter une règle qui s'applique à l'utilisateur (ou peu également travailler par group) :</p>
 {% highlight bash %}
 Match user client_acces
         # The following two directives force client_acces to become chrooted
@@ -41,9 +42,14 @@ Match user client_acces
         X11Forwarding no
 {% endhighlight %}
 
-Le point important découvert grâce au suivi des logs tail -f /var/log/auth.log (ou éventuellement tail -f /var/log/syslog) :
+<p>
+Le point important découvert grâce au suivi des logs 
+  <pre>tail -f /var/log/auth.log</pre> 
+  ou éventuellement 
+  <pre>tail -f /var/log/syslog</pre>
+  </p>
 
-L'ensemble des répertoires et sous répertoires doivent apartenir à root  /home /home/www et /home/www/client_acces/, ensuite on créé les répertoires dont le propriétaire devient client_acces.
+<p>L'ensemble des répertoires et sous répertoires doivent apartenir à root  /home /home/www et /home/www/client_acces/, ensuite on créé les répertoires dont le propriétaire devient client_acces.</p>
 
 
 

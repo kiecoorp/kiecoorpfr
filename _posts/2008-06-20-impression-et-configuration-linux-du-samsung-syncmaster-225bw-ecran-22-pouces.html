@@ -1,7 +1,7 @@
---- 
+---
 layout: post
 title: "Impression et configuration linux du Samsung SyncMaster 225BW (\xC3\xA9cran 22 pouces)"
-categories: 
+categories:
 - Mon avis, mes choix
 - administration
 tags: []
@@ -9,7 +9,7 @@ tags: []
 status: publish
 type: post
 published: true
-meta: 
+meta:
   _edit_lock: "1254314231"
   _edit_last: "1"
 ---
@@ -33,9 +33,9 @@ meta:
 
 <p>Voila les sections Monitor et Device de mon xorg.conf (Ubuntu 6.10 et Xorg 1:7.1.1ubuntu6.2)&nbsp;:</p>
 
-<pre lang="bash">
+{% highlight bash %}
 Section "Device"
-Identifier    "NVIDIA Corporation NV25 <a href="GeForce4 Ti 4200">GeForce4 Ti 4200</a>"
+Identifier    "NVIDIA Corporation NV25 GeForce4 Ti 4200"
 Driver        "nv"
 BusID        "PCI:1:0:0"
 EndSection
@@ -78,6 +78,6 @@ Depth        24
 Modes        "1680x1050" "1024x768" "800x600" "640x480"
 EndSubSection
 EndSection
-</pre>
+{% endhighlight %}
 
 <p>Disponible pour un prix livré de 429.90 €. TTC ce moniteur est un excellent choix pour ceux qui recherche une moniteur de qualité avec une bonne ergonomie. Attention toutefois la résolution proposé est de 1680x1050 comme sur les 20 pouces 16/10 classique, pas plus d'info mais lecture plus confortable.</p>

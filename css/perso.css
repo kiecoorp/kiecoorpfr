@@ -1,0 +1,12 @@
+body {
+  font-size: 14px;
+}
+
+.block-excerpt {
+  border-bottom:2px #ccc solid;
+  margin:4em 0;
+}
+
+.block-excerpt:hover {
+  color:#000;
+}
