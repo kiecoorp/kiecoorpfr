@@ -16,7 +16,7 @@
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
-
+    <script src="/js/perso.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -26,54 +26,38 @@
 
   <body>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
+    <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> Accueil</a>
+        <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> Keep It Simple Stupid !</a>
       </div>
-      <p class="navbar-text navbar-right">Keep It Simple Stupid !</p>
     </div>
-  </nav>
+    </nav>
 
-    <div class="row" ng-app="jekyllApp" ng-controller="PostListCtrl">
-      <script>
-        angular.module('jekyllApp',[]).filter('matchesQuery', function(){
-          return function(items, query){
-            if (typeof query == "undefined") return [];
-            var alternate = query.replace(/ /g,"_").toLowerCase();
-            var lcQuery = query.toLowerCase();
-            var arrayToReturn = [];
-            for (var i=0; i<items.length; i++) {
-              if (items[i] && (items[i].title.toLowerCase().indexOf(lcQuery) !== -1  || items[i].tags.indexOf(alternate) !== -1 || items[i].content.indexOf(alternate) !== -1)) {
-                arrayToReturn.push(items[i]);
-              }
-            }
-            return arrayToReturn;
-          };
-        });
+    <div class="container">
+      <div class="row" ng-app="jekyllApp" ng-controller="PostListCtrl">
+        <div class="col-lg-12">
+          <form role="form" style="margin-top:2em;">
+            <div class="form-group">
+              <div class="input-group">
+                 <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i> </button>
+                </span>
+                <input type="text" class="form-control" ng-model="match" placeholder="Recherche d'un article ...(au moins trois lettres)" >
+              </div>
+              {% raw %} <!-- hack for blog entry - extra space -->
+              <div class="list-group">
+                <a  class="list-group-item" ng-repeat="post in posts | matchesQuery:match" ng-href="{{post.href}}">
+                  <h4 class="list-group-item-heading">{{ post.title }}</h4>
+                  <div class="list-group-item-text" >
+                    <span class="muted">{{post.date.day}}/{{post.date.month}}/{{post.date.year}}</span>  | <span ng-repeat="category in post.categories" class="label label-default">{{ category }}</span>
+                  </div>
 
-        function PostListCtrl($scope, $http) {
-          $scope.query = "";
-          $scope.posts = [];
-          $http.get('/search.json').success(function(data) {
-            $scope.posts = data;
-          });
-        }
-      </script>
-
-      <div class="col-lg-12">
-        <form role="form">
-          <div class="form-group">
-            <input type="text" class="form-control" ng-model="match" placeholder="Recherche d'un article ..." >
-            {% raw %} <!-- hack for blog entry - extra space -->
-            <div class="list-group">
-              <a  class="list-group-item" ng-repeat="post in posts | matchesQuery:match" ng-href="{{post.href}}">
-              {{ post.title }}
-              </a>
+                </a>
+              </div>
+              {% endraw %} <!-- same hack here too -->
             </div>
-            {% endraw %} <!-- same hack here too -->
           </div>
         </div>
-      </div>
 
-      <div class="container-fluid">
+        <div class="container-fluid">
 

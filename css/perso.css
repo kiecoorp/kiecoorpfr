@@ -1,5 +1,11 @@
 body {
   font-size: 14px;
+  /* Base64 CSS (for cross-browser compatibility) */
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNSIgaGVpZ2h0PSIxNSI+CjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgZmlsbD0iIzI4MjgyOCI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSIzIiBjeT0iNC4zIiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIzIiBjeT0iMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+CjxjaXJjbGUgY3g9IjEwLjUiIGN5PSIxMi41IiByPSIxLjgiIGZpbGw9IiMzOTM5MzkiPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIxMC41IiBjeT0iMTEuMyIgcj0iMS44IiBmaWxsPSJibGFjayI+PC9jaXJjbGU+Cjwvc3ZnPg==");
+}
+
+.container {
+ background:#fff;
 }
 
 .block-excerpt {
@@ -9,4 +15,25 @@ body {
 
 .block-excerpt:hover {
   color:#000;
+}
+
+article header {
+  padding-bottom:1em;
+  margin-bottom:2em;
+  border-bottom:1px #efefef solid;
+}
+
+
+article.block-excerpt header {
+  padding-bottom:1em;
+  margin-bottom:0.5em;
+  border-bottom:0px #efefef solid;
+}
+
+article.block-excerpt header h1 a {
+  color: #666;
+}
+article.block-excerpt header h1 a:hover {
+  text-decoration: none;
+  color: #000;
 }

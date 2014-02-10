@@ -2,36 +2,53 @@
 layout: default
 ---
 
-<div class="page-header">
-  <h3>
-    {{ page.title }}
-  </h3>
-  <p class="muted">
-    <div class="pull-right">
-      <a href="https://twitter.com/share" class="twitter-share-button" data-via="kiecoorp" data-lang="fr">Tweeter</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </div>
-  {{ page.date | date_to_string }} | 
-  {% for category in page.categories %}
-  <span class="label label-default">{{ category }}</span> 
-  {% endfor %}
-  </p>
-  <div class="clearfix"></div> 
-</div>
+<article itemscope itemtype="http://schema.org/Article">
 
+<header>
+<h1 itemprop="name">{{ page.title }}</h1>
+Le <time itemprop="dateCreated" datetime="{{page.date | date_to_xmlschema}}"> {{ page.date | date_to_string }}</time> par
+<span itemprop="creator">
+  <span itemscope itemtype="http://schema.org/Person">
+    <span itemprop="name">Frédéric Escarieu</span>
+    <a href="https://plus.google.com/+EscarieuFrederic" target="_blank" itemprop="url">Google+</a>
+  </span>
+</span>
+
+/ Permalien : <a href="{{ page.url }}" itemprop="url">{{ page.title }}</a> /
+
+{% for category in page.categories %}
+<span class="label label-default">{{ category }}</span>
+{% endfor %}
+<div class="pull-right">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-via="kiecoorp" data-lang="fr">Tweeter</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+</header>
+
+<section itemprop="text">
 <div class="post">
   {{ content }}
 </div>
 
-<hr />
-  {% for tag in page.tags %}
-  <span class="label label-primary">{{ tag }}</span>
-  {% endfor %}
+
+{% if page.tags.size != 0 %}
+<hr   />
+{% for tag in page.tags %}
+<span class="label label-primary">{{ tag }}</span>
+{% endfor %}
+
+{% endif %}
+
 <hr class="clearfix" />
 
+</section>
+</article>
+
+<button class="btn btn-link pull-" onClick="window.history.back();"><span class="glyphicon glyphicon-circle-arrow-left"></span> Retour</button>
+
+
 <p class="lead">{{page.path}}</p>
 <p class="lead">{{page.path}}</p>
 
-<button class="btn btn-link pull-" onClick="window.history.back();"><span class="glyphicon glyphicon-circle-arrow-left"></span> Retour</button>
 
 

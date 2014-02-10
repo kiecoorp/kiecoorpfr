@@ -4,16 +4,22 @@ title: Frédéric Escarieu
 ---
 
 {% for post in paginator.posts %}
-<div class="block-excerpt">
 
-  <h2>{{ post.title }}</h2> 
-  <p class="muted">{{ post.date | date: "%d/%m/%Y" }} | 
-  {% for category in post.categories %}
-  <span class="label label-default">{{ category }}</span> 
-  {% endfor %}
+<article class="block-excerpt" itemscope itemtype="http://schema.org/Article">
 
-  </p>
-
+<header>
+<h1 itemprop="name"> <a href="{{ post.url }}" itemprop="url">{{ post.title }}</a></h1>
+Le <time itemprop="dateCreated" datetime="{{post.date | date_to_xmlschema}}"> {{ post.date | date_to_string }}</time> par
+<span itemprop="creator">
+  <span itemscope itemtype="http://schema.org/Person">
+    <span itemprop="name">Frédéric Escarieu</span>
+  </span>
+</span>
+/
+{% for category in post.categories %}
+<span class="label label-default">{{ category }}</span>
+{% endfor %}
+</header>
 
   <div class="content">
     {{ post.excerpt}}
@@ -28,7 +34,7 @@ title: Frédéric Escarieu
     <a class="btn btn-link pull-right" href="{{ post.url }}">En savoir +</a>
   </div>
 
-</div>
+</article>
 
 {% endfor %}
 
