@@ -18,11 +18,11 @@ fonctionnalités
 - microdata
 - liens twitter dans les articles
 
-thèmes
+thème
 ========
 Le thème de base provient de Bootswatch "Simplex" http://bootswatch.com/simplex/
 
-Sur la version actuelle j'ai réalisé très peu de modification de ce thème de base. tout est dans le fichier perso.css.
+Sur la version actuelle j'ai réalisé très peu de modifications de ce thème de base. tout est dans le fichier perso.css.
 
 Optimisations
 ================
