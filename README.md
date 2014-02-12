@@ -6,9 +6,9 @@ Site Web de kiecoorp.fr
 technos
 =========
 
-jekyll 
-boostrap 3.1 
-angularjs 1.2 
+- jekyll 
+- boostrap 3.1 
+- angularjs 1.2 
 
 fonctionnalités
 =================
