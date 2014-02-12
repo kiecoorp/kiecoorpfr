@@ -1,6 +1,6 @@
 name: Kie - Keep It Simple Stupid
 description: "@kiecoorp Web Developper - Co-founder KipSoft #webdev, #sysadmin, #javascript, #php, #ruby Passionné de rugby, amateur de velo. Cahus - France · facturenet.fr"
-url: "www.kiecoorp.fr"
+url: http://www.kiecoorp.fr
 markdown: redcarpet
 pygments: true
 permalink: pretty

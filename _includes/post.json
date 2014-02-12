@@ -3,7 +3,7 @@
   "categories" : [{% for category in post.categories %}"{{ category}}",{% endfor %} null],
   "tags"     : [{% for tag in post.tags %}"{{ tag }}",{% endfor %} null],
   "href"     : "{{ post.url }}",
-  "content"  :  "{{ post.content | cgi_escape }}",
+  "content"  :  "{{ post.content | cleanhtml }}",
   "date"     : {
     "day"   : "{{ post.date | date: "%d" }}",
     "month" : "{{ post.date | date: "%m" }}",
